@@ -140,8 +140,21 @@ main .columns.polaroid-wall {
 }
 .modal-image{
   width:100%;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
 }
-
+.carousel-btn{
+  background-color:rgba(125,125,125,0.5);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+.carousel-prev{
+  border-top-left-radius:15px;
+  border-bottom-left-radius:15px;
+}
+.carousel-next{
+  border-top-right-radius:15px;
+  border-bottom-right-radius:15px;
+}
 
 /**************/
 /* ANIMATIONS */
