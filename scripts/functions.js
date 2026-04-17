@@ -37,7 +37,7 @@ function generateList(jsonObject) {
 // Funzione che crea la singola polaroid, usa la card di template che ho creato in html e un'oggetto dell'array che gli viene dato poi dalla generateList per creare la stringaHTML
 function createPolaroid(polaroidObject) {
     return `
-    <div class="column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper ">
+    <div class=" column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper ">
         <div class="polaroid d-flex flex-column" data-id="${polaroidObject.id}">
             <figure class="polaroid-image-wrapper">
                 <img id="img-${polaroidObject.id}" src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image">

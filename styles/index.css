@@ -90,14 +90,15 @@ main .columns.polaroid-wall {
   max-width: 700px;
 }
 .polaroid {
+  position:relative;
   min-width:100%;
   margin: 0 auto;
   max-width: fit-content;
-  position: relative;
   padding: 1rem 2rem;
   background-color: white;
   color: black;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
 }
 
 .polaroid-image {
@@ -110,11 +111,53 @@ main .columns.polaroid-wall {
 
 .polaroid-image-wrapper::before {
   position: absolute;
+  vertical-align:-50px;
   top: 0;
   left: 50%;
-  translate: -50% -30%;
+  translate: -50% -50%;
   content: URL(../img/pin.svg);
+  aspect-ratio:1;
+  transition: scale 0.5s ease;
 }
+
+.polaroid:hover{
+  scale:1.025;
+  box-shadow:15px 15px 15px rgba(0, 0, 0, 0.5);
+  transform-origin:top;
+  animation: 2s ease-in-out 1 rotation;
+  z-index:2;
+  border: 1px solid black;
+}
+.polaroid:hover .polaroid-image-wrapper::before {
+  scale:1.2;
+}
+
+
+/**************/
+/* ANIMATIONS */
+/**************/
+@keyframes rotation {
+  0% {
+    transform:rotate(0deg);
+  }
+  20% {
+    transform:rotate(5deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+}
+
+
+/*****************/
+/* MEDIA QUERIES */
+/*****************/
 
 @media screen and (min-width: 768px) {
   .polaroid-wrapper {
