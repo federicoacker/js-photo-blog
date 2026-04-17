@@ -1,13 +1,12 @@
 // @ts-check
 'use strict'
 
+const dom = {
+    polaroidWallEl: document.querySelector(".polaroid-wall"),
+    errorMessage: document.querySelector("#errorMessage"),
+    removeErrorBtn: document.querySelector(".delete")
+};
 const API_URL = "https://lanciweb.github.io/demo/api/pictures/";
-const polaroidWallEl = document.querySelector(".polaroid-wall");
-const errorMessage = document.querySelector("#errorMessage");
-const removeErrorBtn = document.querySelector(".delete");
-
-
-
 
 function fetchImages() {
     fetch(API_URL)
@@ -15,8 +14,6 @@ function fetchImages() {
         .then(json => generateList(json))
         .catch(responseError => generateError(responseError))
 }
-
-
 
 /**
  * @param {{ id: number, title: string, date: string, url: string }} polaroidObject
@@ -42,8 +39,8 @@ function generateList(jsonObject) {
     setTimeout(() => {
         const htmlStringArray = jsonObject.map(object => createPolaroid(object));
         const htmlString = htmlStringArray.join("");
-        if (polaroidWallEl) {
-            polaroidWallEl.innerHTML = htmlString;
+        if (dom.polaroidWallEl) {
+            dom.polaroidWallEl.innerHTML = htmlString;
         }
     }, 5 * 1000);
 
@@ -53,22 +50,22 @@ function generateList(jsonObject) {
  * @param {{message: string, stack: string}} responseError
  */
 function generateError(responseError){
-    if(errorMessage){
-        const p = errorMessage.querySelector("p");
+    if(dom.errorMessage){
+        const p = dom.errorMessage.querySelector("p");
         if(p){
             p.textContent = responseError.stack;
         }
-        errorMessage.classList.remove("d-none");
+        dom.errorMessage.classList.remove("d-none");
     }
 }
 
 function removeErrorBtnHandler(){
-    if(errorMessage){
-        errorMessage.classList.add("d-none");
+    if(dom.errorMessage){
+        dom.errorMessage.classList.add("d-none");
     }
 }
 
 document.addEventListener("DOMContentLoaded", fetchImages);
-if(removeErrorBtn){
-    removeErrorBtn.addEventListener("click", removeErrorBtnHandler);
+if(dom.removeErrorBtn){
+    dom.removeErrorBtn.addEventListener("click", removeErrorBtnHandler);
 }
