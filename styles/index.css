@@ -135,6 +135,9 @@ main .columns.polaroid-wall {
 .modal-close{
   position:relative;
 }
+.modal-image{
+  width:100%;
+}
 
 
 /**************/

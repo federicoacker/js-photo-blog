@@ -78,15 +78,29 @@ function removeErrorBtnHandler(){
  * @param {{target:?HTMLElement}} event;
  */
 function openModal(event){
+    /**
+     * @type {HTMLImageElement | HTMLElement | null}
+     */
     const target = event.target;
-    if(dom.modalEl && target && target.dataset.target === "modal" ){
+    if(dom.modalEl && target && target.dataset.target === "modal" && target instanceof HTMLImageElement){ // Aggiunto questa condizione target instanceof HTMLImageElement per rendere felice jsdoc che si lamentava che non era certo che target fosse un HTMLImageElement
         dom.modalEl.classList.add("is-active");
-        generateModal();  
+        generateModal(target);  
     }
 }
-
 
 function closeModal(){
     const allModalEls = document.querySelectorAll(".modal");
     allModalEls.forEach(modalElement => {modalElement.classList.remove("is-active");});
+}
+
+/**
+ * @param {HTMLImageElement | null} imageElement;
+ */
+function generateModal(imageElement){
+    if(dom.modalEl && imageElement){
+        const modalImage = dom.modalEl.querySelector("img");
+        if(modalImage){
+            modalImage.src = imageElement.src;
+        }
+    }
 }
