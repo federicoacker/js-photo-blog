@@ -1,7 +1,7 @@
 // @ts-check
 'use strict'
 
-const API_URL = "https://lanciweb.github.iods/demo/api/pictures/";
+const API_URL = "https://lanciweb.github.io/demo/api/pictures/";
 const polaroidWallEl = document.querySelector(".polaroid-wall");
 const errorMessage = document.querySelector("#errorMessage");
 const removeErrorBtn = document.querySelector(".delete");
