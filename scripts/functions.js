@@ -142,7 +142,6 @@ function carouselPrevBtnHandler(){
         let imageToSelect;
         let srcIWant;
         carouselIndex--;
-        console.log(carouselIndex)
         if(dom.polaroidWallEl && carouselIndex < 0){
             carouselIndex = dom.polaroidWallEl.children.length - 1;
         }
