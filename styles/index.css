@@ -1,8 +1,12 @@
 * {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bulma-body-overflow-y: auto;
 }
 /*********/
 /* FONTS */
@@ -13,7 +17,7 @@
   font-style: normal;
 }
 
-.sometype-mono{
+.sometype-mono {
   font-family: "Sometype Mono", monospace;
   font-weight: normal;
   font-style: normal;
@@ -22,25 +26,87 @@
 /*******************/
 /* Utility Classes */
 /*******************/
-.text-center{
-    text-align:center;
+.d-flex {
+  display: flex;
 }
-.align-items-start{
-    align-items:start;
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap-wrap {
+  flex-wrap: wrap;
+}
+.text-center {
+  text-align: center;
+}
+.align-items-start {
+  align-items: start;
 }
 
+.fw-bold {
+  font-weight: bold;
+}
 /****************/
 /* Tag Classes */
 /***************/
 .wrapper {
-    height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-header{
-    background-image: URL("../img/wall.png");
+
+.wrapper > .header {
+  background-image: URL("../img/wall.png");
+  flex-grow: 0;
+  color: black;
 }
-main {
-    background-image: URL("../img/cork.png");
+.wrapper > .main {
+  background-image: URL("../img/cork.png");
+  flex-grow: 1;
 }
 h1 {
-    font-size:60px;
+  font-size: 60px;
+}
+main .columns.polaroid-wall {
+  margin-bottom: 0;
+  row-gap: 3rem;
+  padding: 2rem 6rem;
+  flex-wrap: wrap;
+}
+.polaroid-wrapper {
+  margin: 2rem auto;
+}
+.polaroid {
+  margin: 0 auto;
+  max-width: fit-content;
+  position: relative;
+  padding: 1rem 2rem;
+  background-color: white;
+  color: black;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.polaroid-image {
+  max-width: 600px;
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.polaroid-image-wrapper::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -30%;
+  content: URL(../img/pin.svg);
+}
+
+@media screen and (min-width: 768px) {
+  .polaroid-wrapper {
+    margin: 0;
+  }
+}
+@media screen and (min-width: 3300px) {
+  .is-2-ultrawide {
+    flex: none !important;
+    width: calc(100% / 6) !important;
+  }
 }
