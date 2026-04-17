@@ -2,7 +2,7 @@
 'use strict'
 
 const API_URL = "https://lanciweb.github.io/demo/api/pictures/";
-
+const polaroidWallEl = document.querySelector(".polaroid-wall")
 fetch(API_URL)
     .then(response => response.json())
     .then(json => generateList(json))
@@ -20,7 +20,7 @@ function createPolaroid(polaroidObject) {
             <figure class="polaroid-image-wrapper">
                 <img src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image">
             </figure>
-            <h3 class="sometype-mono">${polaroidObject.title}</h3>
+            <h2 class="sometype-mono">${polaroidObject.title}</h2>
             <p class="sometype-mono">${polaroidObject.date}</p>
         </div>
     </div>
@@ -32,5 +32,9 @@ function createPolaroid(polaroidObject) {
 */
 function generateList(jsonObject){
     const htmlStringArray = jsonObject.map(object => createPolaroid(object));
+    const htmlString = htmlStringArray.join("");
+    if(polaroidWallEl){
+        polaroidWallEl.innerHTML = htmlString;
+    }
     
 }

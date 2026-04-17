@@ -73,6 +73,9 @@
 h1 {
   font-size: 60px;
 }
+h2 {
+  font-size: 30px;
+}
 main .columns.polaroid-wall {
   margin-bottom: 0;
   row-gap: 3rem;
