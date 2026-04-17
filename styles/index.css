@@ -20,7 +20,7 @@
 .sometype-mono {
   font-family: "Sometype Mono", monospace;
   font-weight: normal;
-  font-style: normal;
+  font-style: italic;
 }
 
 /*******************/
@@ -49,12 +49,19 @@
 /* Tag Classes */
 /***************/
 .wrapper {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .wrapper > .header {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:sticky;
+  top:0;
+  z-index:99;
+  min-height:15vh;
   background-image: URL("../img/wall.png");
   flex-grow: 0;
   color: black;
