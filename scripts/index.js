@@ -2,10 +2,11 @@
 'use strict'
 
 const API_URL = "https://lanciweb.github.iods/demo/api/pictures/";
-const polaroidWallEl = document.querySelector(".polaroid-wall")
-const errorMessage = document.querySelector("#errorMessage")
+const polaroidWallEl = document.querySelector(".polaroid-wall");
+const errorMessage = document.querySelector("#errorMessage");
+const removeErrorBtn = document.querySelector(".delete");
 
-document.addEventListener("DOMContentLoaded", fetchImages);
+
 
 
 function fetchImages() {
@@ -60,4 +61,15 @@ function generateError(responseError){
         }
         errorMessage.classList.remove("d-none");
     }
+}
+
+function removeErrorBtnHandler(){
+    if(errorMessage){
+        errorMessage.classList.add("d-none");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", fetchImages);
+if(removeErrorBtn){
+    removeErrorBtn.addEventListener("click", removeErrorBtnHandler);
 }
