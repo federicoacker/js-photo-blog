@@ -4,8 +4,9 @@
 // La nostra funzione che lancia il fetch
 function fetchImages() {
     fetch(API_URL)
-        .then(response => response.json())                          // Quando risolvi la promessa, allora lancia .json sull'oggetto che hai ricevuto e restituisci il json
-        .then(json => generateList(json))                           // una volta che hai risolto la promessa, e ottenuto l'oggetto 
+        .then(response => response.json())                          // Quando risolvi la promessa, allora lancia .json sull'oggetto 
+                                                                    // che hai ricevuto e restituisci il json parsato come oggetto (che è quello che fa .json())
+        .then(parsedJson => generateList(parsedJson))               // una volta che hai risolto la promessa, e ottenuto l'oggetto 
                                                                     // (che in questo caso è un array di oggetti), 
                                                                     // chiama la funzione generateList
         .catch(responseError => generateError(responseError))       // Se invece ricevi un errore, chiama la generateError
@@ -14,13 +15,14 @@ function fetchImages() {
 /** 
  * @param {{ id: number, title: string, date: string, url: string }[]} jsonObject
 */
-
-//Funzione che genera la lista di polaroid (riceve il nostro oggetto che gli viene dato dal then, come vediamo, è un array di oggetti)
+// Funzione che genera la lista di polaroid (riceve il nostro oggetto che gli viene dato dal then, come vediamo, è un array di oggetti)
 function generateList(jsonObject) {
     setTimeout(() => {                                                              // setTimeout di 5 secondi, messo solo per poter testare gli skeleton loaders di Bulma
-        const htmlStringArray = jsonObject.map(object => createPolaroid(object));   // Altrimenti, crea un'array di stringhe html usando la map function sull'array che hai ricevuto dal then
-                                                                                    // Per ogni oggetto dell'Array chiami la createPolaroid, dandogli l'oggetto e la stringa che ricevi la metti nell'array
-        const htmlString = htmlStringArray.join("");                                // Una volta che l'array è pieno, lo converti in una grossa stringa
+        const htmlStringArray = jsonObject.map(object => createPolaroid(object));   // Altrimenti, crea un'array di stringhe html usando la map function 
+                                                                                    // sull'array che hai ricevuto dal then
+                                                                                    // Per ogni oggetto dell'Array chiami la createPolaroid, 
+                                                                                    // dandogli l'oggetto; la stringa che ricevi la metti nell'array
+        const htmlString = htmlStringArray.join("");                                // Una volta finito, converti l'array in una grossa stringa
         if (dom.polaroidWallEl) {                                                   // E se il polaroidWall esiste come elemento
             dom.polaroidWallEl.innerHTML = htmlString;                              // Setti il suo innerHTML alla grossa stringa che hai generato
         }
@@ -32,7 +34,7 @@ function generateList(jsonObject) {
  * @param {{ id: number, title: string, date: string, url: string }} polaroidObject
  */
 
-//Funzione che crea la singola polaroid, usa la card di template che ho creato in html e un'oggetto dell'array che gli viene dato poi dalla generateList per creare la stringaHTML
+// Funzione che crea la singola polaroid, usa la card di template che ho creato in html e un'oggetto dell'array che gli viene dato poi dalla generateList per creare la stringaHTML
 function createPolaroid(polaroidObject) {
     return `
     <div class="column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper ">
@@ -52,20 +54,21 @@ function createPolaroid(polaroidObject) {
 /**
  * @param {{message: string, stack: string}} responseError
  */
-//Funzione che genera gli errori, riceve l'errore che gli viene dato dalla catch
+// Funzione che genera gli errori, riceve l'errore che gli viene dato dalla catch
 function generateError(responseError){
-    if(dom.errorMessage){                                       //Se esiste l'htmlElement errorMessage nel dom
-        const p = dom.errorMessage.querySelector("p");          //Allora seleziona il p al suo interno
-        if(p){                                                  //Se il p esiste
-            p.textContent = responseError.stack;                //Setta il textContent alla proprietà stack del responseError (Questo ho visto com'era fatto, facendo console.dir(responseError) nel catch prima)
-            dom.errorMessage.classList.remove("d-none");        //Rimuovi la classe d-none dall'errorMessage
+    if(dom.errorMessage){                                       // Se esiste l'htmlElement errorMessage nel dom
+        const p = dom.errorMessage.querySelector("p");          // Allora seleziona il p al suo interno
+        if(p){                                                  // Se il p esiste
+            p.textContent = responseError.stack;                // Setta il textContent alla proprietà stack del responseError 
+                                                                // (Questo ho visto com'era fatto, facendo console.dir(responseError) nel catch prima)
+            dom.errorMessage.classList.remove("d-none");        // Rimuovi la classe d-none dall'errorMessage
         }
     }
 }
 
-//Handler per il bottone che chiude l'errorMessage
+// Handler per il bottone che chiude l'errorMessage
 function removeErrorBtnHandler(){
-    if(dom.errorMessage){                                       //Se esiste l'errorMessage come elemento
-        dom.errorMessage.classList.add("d-none");               //Aggiungi d-none alla sua classList
+    if(dom.errorMessage){                                       // Se esiste l'errorMessage come elemento
+        dom.errorMessage.classList.add("d-none");               // Aggiungi d-none alla sua classList
     }
 }
