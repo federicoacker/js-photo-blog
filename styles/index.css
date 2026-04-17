@@ -26,6 +26,9 @@
 /*******************/
 /* Utility Classes */
 /*******************/
+.fs-button{
+  font-size:2rem;
+}
 .d-none{
   display:none;
 }
