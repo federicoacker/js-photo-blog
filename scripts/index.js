@@ -15,3 +15,6 @@ if(dom.removeErrorBtn){
     dom.removeErrorBtn.addEventListener("click", removeErrorBtnHandler);
 }
 document.addEventListener("click", openModal);
+if(dom.modalCloseBtnEl){
+    dom.modalCloseBtnEl.addEventListener("click", closeModal);
+}

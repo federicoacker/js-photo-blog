@@ -74,14 +74,19 @@ function removeErrorBtnHandler(){
 }
 
 /**
+ * @type {EventListener}
  * @param {{target:?HTMLElement}} event;
  */
 function openModal(event){
     const target = event.target;
     if(dom.modalEl && target && target.dataset.target === "modal" ){
-        dom.modalEl.classList.add("is-active");  
+        dom.modalEl.classList.add("is-active");
+        generateModal();  
     }
 }
-function closeModal(event){
 
+
+function closeModal(){
+    const allModalEls = document.querySelectorAll(".modal");
+    allModalEls.forEach(modalElement => {modalElement.classList.remove("is-active");});
 }
