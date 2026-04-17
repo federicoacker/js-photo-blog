@@ -136,5 +136,27 @@ function carouselNextBtnHandler(){
     }
 }
 function carouselPrevBtnHandler(){
-
+    if(dom.modalEl){
+        const modalImage = dom.modalEl.querySelector("img");
+        let childToSelect;
+        let imageToSelect;
+        let srcIWant;
+        carouselIndex--;
+        console.log(carouselIndex)
+        if(dom.polaroidWallEl && carouselIndex < 0){
+            carouselIndex = dom.polaroidWallEl.children.length - 1;
+        }
+        if(dom.polaroidWallEl){
+            childToSelect = dom.polaroidWallEl.children[carouselIndex];
+            if(childToSelect){
+                imageToSelect = childToSelect.querySelector("img");
+                if(imageToSelect){
+                    srcIWant = imageToSelect.src;
+                }
+            }
+        }
+        if(modalImage && srcIWant){
+            modalImage.src = srcIWant;
+        }
+    }
 }

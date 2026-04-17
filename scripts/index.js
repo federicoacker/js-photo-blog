@@ -23,4 +23,5 @@ if(dom.modalCloseBtnEl){
 
 if(dom.modalNextBtnEl && dom.modalPrevBtnEl){
     dom.modalNextBtnEl.addEventListener("click", carouselNextBtnHandler);
+    dom.modalPrevBtnEl.addEventListener("click", carouselPrevBtnHandler);
 }
