@@ -14,7 +14,6 @@ function fetchImages() {
         .then(response => response.json())
         .then(json => generateList(json))
         .catch(responseError => generateError(responseError))
-        .finally(() => { console.log("Finished fetching, here's your data, or your error:") });
 }
 
 
