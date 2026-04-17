@@ -40,7 +40,7 @@ function createPolaroid(polaroidObject) {
     <div class=" column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper ">
         <div class="polaroid d-flex flex-column" data-id="${polaroidObject.id}">
             <figure class="polaroid-image-wrapper">
-                <img id="img-${polaroidObject.id}" src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image">
+                <img id="img-${polaroidObject.id}" src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image js-modal-trigger" data-target="modal">
             </figure>
             <h2 class="sometype-mono">${polaroidObject.title}</h2>
             <p class="sometype-mono">${polaroidObject.date}</p>
@@ -71,4 +71,17 @@ function removeErrorBtnHandler(){
     if(dom.errorMessage){                                       // Se esiste l'errorMessage come elemento
         dom.errorMessage.classList.add("d-none");               // Aggiungi d-none alla sua classList
     }
+}
+
+/**
+ * @param {{target:?HTMLElement}} event;
+ */
+function openModal(event){
+    const target = event.target;
+    if(dom.modalEl && target && target.dataset.target === "modal" ){
+        dom.modalEl.classList.add("is-active");  
+    }
+}
+function closeModal(event){
+
 }

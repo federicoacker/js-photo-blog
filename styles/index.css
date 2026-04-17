@@ -63,7 +63,7 @@
   justify-content:center;
   position:sticky;
   top:0;
-  z-index:99;
+  z-index:4;
   min-height:15vh;
   background-image: URL("../img/wall.png");
   flex-grow: 0;
@@ -130,6 +130,10 @@ main .columns.polaroid-wall {
 }
 .polaroid:hover .polaroid-image-wrapper::before {
   scale:1.2;
+}
+
+.modal-close{
+  position:relative;
 }
 
 
