@@ -27,7 +27,7 @@
 /* Utility Classes */
 /*******************/
 .d-none{
-    display:none;
+  display:none;
 }
 .d-flex {
   display: flex;
@@ -74,7 +74,7 @@
   flex-grow: 1;
 }
 h1 {
-  font-size: 60px;
+  font-size: 96px;
 }
 h2 {
   font-size: 30px;
@@ -87,6 +87,7 @@ main .columns.polaroid-wall {
 }
 .polaroid-wrapper {
   margin: 2rem auto;
+  max-width: 700px;
 }
 .polaroid {
   min-width:100%;
@@ -103,6 +104,8 @@ main .columns.polaroid-wall {
   max-width: 600px;
   aspect-ratio: 1;
   width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 .polaroid-image-wrapper::before {
@@ -118,8 +121,14 @@ main .columns.polaroid-wall {
     margin: 0;
   }
 }
-@media screen and (min-width: 3300px) {
-  .is-2-ultrawide {
+@media screen and (min-width: 2600px) {
+  .is-ultrawide {
+    flex: none !important;
+    width: calc(100% / 4) !important;
+  }
+}
+@media screen and (min-width: 3000px) {
+  .is-ultrawide {
     flex: none !important;
     width: calc(100% / 6) !important;
   }

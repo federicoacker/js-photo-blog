@@ -23,7 +23,7 @@ function fetchImages() {
  */
 function createPolaroid(polaroidObject) {
     return `
-    <div class="column is-12-mobile is-6-tablet is-4-desktop is-2-ultrawide polaroid-wrapper ">
+    <div class="column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper ">
         <div class="polaroid d-flex flex-column" data-id="${polaroidObject.id}">
             <figure class="polaroid-image-wrapper">
                 <img id="img-${polaroidObject.id}" src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image">
