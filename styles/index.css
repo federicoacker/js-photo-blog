@@ -26,6 +26,9 @@
 /*******************/
 /* Utility Classes */
 /*******************/
+.d-none{
+    display:none;
+}
 .d-flex {
   display: flex;
 }

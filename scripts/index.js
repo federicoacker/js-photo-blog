@@ -58,5 +58,6 @@ function generateError(responseError){
         if(p){
             p.textContent = responseError.stack;
         }
+        errorMessage.classList.remove("d-none");
     }
 }
