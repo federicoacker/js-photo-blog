@@ -145,12 +145,19 @@ main .columns.polaroid-wall {
   scale:1.2;
 }
 
+.modal{
+  --bulma-modal-content-width:95%;
+}
+.modal-content{
+  justify-content:center;
+}
 .modal-close{
   position:relative;
   inset-inline-end:0;
 }
 .modal-image{
   width:100%;
+  max-width: 800px;
   border-top: 1px solid rgba(255,255,255,0.5);
   border-bottom: 1px solid rgba(255,255,255,0.5);
 }
