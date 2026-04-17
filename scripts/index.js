@@ -3,6 +3,7 @@
 
 const API_URL = "https://lanciweb.github.iods/demo/api/pictures/";
 const polaroidWallEl = document.querySelector(".polaroid-wall")
+const errorMessage = document.querySelector("#errorMessage")
 
 document.addEventListener("DOMContentLoaded", fetchImages);
 
@@ -11,7 +12,7 @@ function fetchImages() {
     fetch(API_URL)
         .then(response => response.json())
         .then(json => generateList(json))
-        .catch(responseError => alert(responseError))
+        .catch(responseError => generateError(responseError))
         .finally(() => { console.log("Finished fetching, here's your data, or your error:") });
 }
 
@@ -46,4 +47,16 @@ function generateList(jsonObject) {
         }
     }, 10 * 1000);
 
+}
+
+/**
+ * @param {{message: string, stack: string}} responseError
+ */
+function generateError(responseError){
+    if(errorMessage){
+        const p = errorMessage.querySelector("p");
+        if(p){
+            p.textContent = responseError.stack;
+        }
+    }
 }
