@@ -1,6 +1,11 @@
 // @ts-check
 'use strict'
 
+/**
+ * @type {number};
+ */
+let carouselIndex = 0;
+
 // La nostra funzione che lancia il fetch
 function fetchImages() {
     fetch(API_URL)
@@ -38,9 +43,9 @@ function generateList(jsonObject) {
 function createPolaroid(polaroidObject) {
     return `
     <div class=" column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper ">
-        <div class="polaroid d-flex flex-column" data-id="${polaroidObject.id}">
+        <div class="polaroid d-flex flex-column">
             <figure class="polaroid-image-wrapper">
-                <img id="img-${polaroidObject.id}" src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image js-modal-trigger" data-target="modal">
+                <img id="img-${polaroidObject.id}" src="${polaroidObject.url}" alt="${polaroidObject.title}" class="polaroid-image js-modal-trigger" data-target="modal" data-id="${polaroidObject.id}">
             </figure>
             <h2 class="sometype-mono">${polaroidObject.title}</h2>
             <p class="sometype-mono">${polaroidObject.date}</p>
@@ -82,7 +87,8 @@ function openModal(event){
      * @type {HTMLImageElement | HTMLElement | null}
      */
     const target = event.target;
-    if(dom.modalEl && target && target.dataset.target === "modal" && target instanceof HTMLImageElement){ // Aggiunto questa condizione target instanceof HTMLImageElement per rendere felice jsdoc che si lamentava che non era certo che target fosse un HTMLImageElement
+    if(dom.modalEl && target && target.dataset.target === "modal" && target instanceof HTMLImageElement && target.dataset.id){ // Aggiunto questa condizione target instanceof HTMLImageElement per rendere felice jsdoc che si lamentava che non era certo che target fosse un HTMLImageElement
+        carouselIndex = parseInt(target.dataset.id)-1;
         dom.modalEl.classList.add("is-active");
         generateModal(target);  
     }
@@ -103,4 +109,32 @@ function generateModal(imageElement){
             modalImage.src = imageElement.src;
         }
     }
+}
+
+function carouselNextBtnHandler(){
+    if(dom.modalEl){
+        const modalImage = dom.modalEl.querySelector("img");
+        let childToSelect;
+        let imageToSelect;
+        let srcIWant;
+        carouselIndex++;
+        if(dom.polaroidWallEl && carouselIndex >= dom.polaroidWallEl.children.length){
+            carouselIndex = 0;
+        }
+        if(dom.polaroidWallEl){
+            childToSelect = dom.polaroidWallEl.children[carouselIndex];
+            if(childToSelect){
+                imageToSelect = childToSelect.querySelector("img");
+                if(imageToSelect){
+                    srcIWant = imageToSelect.src;
+                }
+            }
+        }
+        if(modalImage && srcIWant){
+            modalImage.src = srcIWant;
+        }
+    }
+}
+function carouselPrevBtnHandler(){
+
 }

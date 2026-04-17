@@ -6,7 +6,9 @@ const dom = {
     errorMessage: document.querySelector("#errorMessage"),
     removeErrorBtn: document.querySelector(".delete"),
     modalEl: document.querySelector("#modal"),
-    modalCloseBtnEl: document.querySelector(".modal-close")
+    modalCloseBtnEl: document.querySelector(".modal-close"),
+    modalNextBtnEl: document.querySelector("#carousel-next"),
+    modalPrevBtnEl: document.querySelector("#carousel-prev"),
 };
 const API_URL = "https://lanciweb.github.io/demo/api/pictures/";
 
@@ -17,4 +19,8 @@ if(dom.removeErrorBtn){
 document.addEventListener("click", openModal);
 if(dom.modalCloseBtnEl){
     dom.modalCloseBtnEl.addEventListener("click", closeModal);
+}
+
+if(dom.modalNextBtnEl && dom.modalPrevBtnEl){
+    dom.modalNextBtnEl.addEventListener("click", carouselNextBtnHandler);
 }
