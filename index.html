@@ -18,24 +18,37 @@
 <body>
     <template id="polaroid-template">
         <div class=" column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper polaroid-container">
-        <div class="polaroid d-flex flex-column">
-            <figure class="polaroid-image-wrapper">
-                <img id="empty" src="empty" alt="empty" class="polaroid-image js-modal-trigger" data-target="modal" data-id="empty">
-            </figure>
-            <h2 class="sometype-mono">empty</h2>
-            <p class="sometype-mono">empty</p>
+            <div class="polaroid d-flex flex-column">
+                <figure class="polaroid-image-wrapper">
+                    <img id="empty" src="empty" alt="empty" class="polaroid-image js-modal-trigger" data-target="modal"
+                        data-id="empty">
+                </figure>
+                <h2 class="sometype-mono">empty</h2>
+                <p class="sometype-mono">empty</p>
+            </div>
         </div>
-    </div>
     </template>
     <div class="wrapper">
         <header class="header">
             <h1 class="edu-tas-beginner fw-bold text-center">ESTATE'24</h1>
         </header>
         <main class="main">
-            <div class="columns interactibles-container">
+            <div class="columns interactibles-container is-centered">
                 <div class="column is-full">
                     <button class="add-image-btn" id="add-image-btn">Aggiungi Immagine</button>
                 </div>
+                <form
+                    class=" column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper polaroid-container">
+                    <div class="placeholder-polaroid d-flex flex-column">
+                        <figure class="polaroid-image-wrapper">
+                            <input type="file" id="image-upload-input">
+                            <img id="img-upload-preview" src="" alt="" class="polaroid-image d-none">
+                        </figure>
+                        <input type="text" id="title-input" class="sometype-mono image-input-text" placeholder="Inserisci il titolo dell'immagine">
+                        <input type="text" id="date-input" class="sometype-mono image-input-text" placeholder="Inserisci la data dell'immagine">
+                        <button type="submit" class="add-image-btn" id="push-image">Aggiungi Immagine</button>
+                    </div>
+                </form>
                 <div class="column is-full">
                     <div class="columns is-centered">
                         <div class="column is-full-mobile is-half-desktop">
@@ -109,11 +122,13 @@
     <div class="modal" id="modal">
         <div class="modal-background"></div>
         <div class="modal-content d-flex">
-            <button id="carousel-prev" class="carousel-btn carousel-prev"><i class="bi bi-arrow-bar-left fs-button"></i></button>
+            <button id="carousel-prev" class="carousel-btn carousel-prev"><i
+                    class="bi bi-arrow-bar-left fs-button"></i></button>
             <p class="image is-1by1 modal-image">
                 <img src="https://bulma.io/assets/images/placeholders/1280x960.png" alt="">
             </p>
-            <button id="carousel-next" class="carousel-btn carousel-next"><i class="bi bi-arrow-bar-right fs-button"></i></button>
+            <button id="carousel-next" class="carousel-btn carousel-next"><i
+                    class="bi bi-arrow-bar-right fs-button"></i></button>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
