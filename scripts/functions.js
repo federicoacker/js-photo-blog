@@ -33,8 +33,11 @@ function createPolaroid(polaroidObject) {
             imageEl.src = polaroidObject.imageURL;
             titleEl.textContent = polaroidObject.title;
             dateEl.textContent = polaroidObject.date;
-            imageEl.dataset.index = polaroidObject.index.toString();
-            imageEl.dataset.id = polaroidObject.id.toString();
+            const polaroidCard = imageEl.closest(".polaroid-container")
+            if(polaroidCard && polaroidCard instanceof HTMLElement){
+                polaroidCard.dataset.index = polaroidObject.index.toString();
+                polaroidCard.dataset.id = polaroidObject.id.toString();
+            }
         }
     
         if(dom.polaroidWallEl){
