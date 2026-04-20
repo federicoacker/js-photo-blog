@@ -15,7 +15,7 @@ const dom = {
     modalPrevBtnEl: document.querySelector("#carousel-prev"),
     html: document.querySelector("html")
 };
-const API_URL = "https://lanciweb.github.io/demo/api/pictures/";
+const API_URL = "https://lanciweb.githubsd.io/demo/api/pictures/";
 
 document.addEventListener("DOMContentLoaded", fetchImages);
 if(dom.removeErrorBtn){

@@ -26,11 +26,11 @@
 /*******************/
 /* Utility Classes */
 /*******************/
-.fs-button{
-  font-size:2rem;
+.fs-button {
+  font-size: 2rem;
 }
-.d-none{
-  display:none;
+.d-none {
+  display: none;
 }
 .d-flex {
   display: flex;
@@ -61,13 +61,13 @@
 }
 
 .wrapper > .header {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:sticky;
-  top:0;
-  z-index:4;
-  min-height:15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  min-height: 15vh;
   background-image: URL("../img/wall.png");
   flex-grow: 0;
   color: black;
@@ -92,9 +92,9 @@ main .columns.polaroid-wall {
   margin: 2rem auto;
   max-width: 700px;
 }
-.placeholder-polaroid{
-  position:relative;
-  min-width:100%;
+.placeholder-polaroid {
+  position: relative;
+  min-width: 100%;
   margin: 0 auto;
   max-width: fit-content;
   padding: 1rem 2rem;
@@ -103,8 +103,8 @@ main .columns.polaroid-wall {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 .polaroid {
-  position:relative;
-  min-width:100%;
+  position: relative;
+  min-width: 100%;
   margin: 0 auto;
   max-width: fit-content;
   padding: 1rem 2rem;
@@ -124,57 +124,80 @@ main .columns.polaroid-wall {
 
 .polaroid-image-wrapper::before {
   position: absolute;
-  vertical-align:-50px;
+  vertical-align: -50px;
   top: 0;
   left: 50%;
   translate: -50% -50%;
   content: URL(../img/pin.svg);
-  aspect-ratio:1;
+  aspect-ratio: 1;
   transition: scale 0.5s ease;
 }
 
-.polaroid:hover{
-  scale:1.025;
-  box-shadow:15px 15px 15px rgba(0, 0, 0, 0.5);
-  transform-origin:top;
+.polaroid:hover {
+  scale: 1.025;
+  box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+  transform-origin: top;
   animation: 2s ease-in-out 1 rotation;
-  z-index:2;
+  z-index: 2;
   border: 1px solid black;
 }
 .polaroid:hover .polaroid-image-wrapper::before {
-  scale:1.2;
+  scale: 1.2;
   content: none;
 }
-html.modal-open{
-  overflow:hidden;
+html.modal-open {
+  overflow: hidden;
 }
-.modal{
-  --bulma-modal-content-width:95%;
+.modal {
+  --bulma-modal-content-width: 95%;
 }
-.modal-content{
-  justify-content:center;
+.modal-content {
+  justify-content: center;
 }
-.modal-close{
-  position:relative;
-  inset-inline-end:0;
+.modal-close {
+  position: relative;
+  inset-inline-end: 0;
 }
-.modal-image{
-  width:100%;
+.delete:hover {
+  border-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.5);
+}
+.modal-image {
+  width: 100%;
   max-width: 800px;
-  border-top: 1px solid rgba(255,255,255,0.5);
-  border-bottom: 1px solid rgba(255,255,255,0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
-.carousel-btn{
-  background-color:rgba(125,125,125,0.5);
-  border: 1px solid rgba(255,255,255,0.5);
+.carousel-btn {
+  background-color: rgba(125, 125, 125, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
-.carousel-prev{
-  border-top-left-radius:15px;
-  border-bottom-left-radius:15px;
+.carousel-prev {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
-.carousel-next{
-  border-top-right-radius:15px;
-  border-bottom-right-radius:15px;
+.carousel-next {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.interactibles-container {
+  flex-wrap: wrap;
+  padding-top: 30px;
+}
+.add-image-btn {
+  display: block;
+  margin: 0 auto;
+  color: black;
+  border: 2px solid rgba(125, 125, 125, 0.5);
+  border-radius: 5px;
+  padding: 5px 10px;
+  background: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.add-image-btn:hover {
+  border: 2px solid rgba(0, 125, 125, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 125, 125, 0.5);
 }
 
 /**************/
@@ -182,10 +205,10 @@ html.modal-open{
 /**************/
 @keyframes rotation {
   0% {
-    transform:rotate(0deg);
+    transform: rotate(0deg);
   }
   20% {
-    transform:rotate(5deg);
+    transform: rotate(5deg);
   }
   40% {
     transform: rotate(-5deg);
@@ -197,7 +220,6 @@ html.modal-open{
     transform: rotate(0deg);
   }
 }
-
 
 /*****************/
 /* MEDIA QUERIES */
