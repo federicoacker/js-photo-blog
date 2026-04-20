@@ -233,6 +233,11 @@ html.modal-open {
   content:none;
 }
 
+.polaroid-form .polaroid-image-wrapper{
+  max-width: 450px;
+  margin: 0 auto;
+}
+
 /**************/
 /* ANIMATIONS */
 /**************/
@@ -261,6 +266,9 @@ html.modal-open {
 @media screen and (min-width: 768px) {
   .polaroid-wrapper {
     margin: 0;
+  }
+  .polaroid-form .polaroid-image-wrapper{
+  max-width: 600px;
   }
 }
 @media screen and (min-width: 2600px) {
