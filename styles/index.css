@@ -47,7 +47,9 @@
 .align-items-start {
   align-items: start;
 }
-
+.justify-content-center{
+  justify-content: center;
+}
 .fw-bold {
   font-weight: bold;
 }
@@ -92,6 +94,7 @@ main .columns.polaroid-wall {
   margin: 2rem auto;
   max-width: 700px;
 }
+
 .placeholder-polaroid {
   position: relative;
   min-width: 100%;
@@ -185,29 +188,49 @@ html.modal-open {
   padding-top: 30px;
 }
 .add-image-btn {
-  display: block;
   margin: 0 auto;
-  color: black;
-  border: 2px solid rgba(125, 125, 125, 0.5);
-  border-radius: 5px;
-  padding: 5px 10px;
-  background: white;
-  outline: none;
+  background-color:black;
+  border-radius:50%;
+  border:2px solid black;
+  font-size:60px;
+  color:white;
   transition: all 0.3s ease;
+  position:fixed;
+  bottom:0;
+  right:0;
+  translate: -25% -100%;
+  z-index: 5;
 }
-.add-image-btn:hover {
-  border: 2px solid rgba(0, 125, 125, 0.5);
-  box-shadow: 0px 0px 10px rgba(0, 125, 125, 0.5);
+.push-image-btn{
+  margin: 5px auto;
+  padding: 5px 10px;
+  border: 2px solid rgba(125, 125, 125, 0.5);
+  border-radius:10px;
+  background-color:white;
+  color:black;
+  transition: all 0.3s ease;
+
+}
+.add-image-btn:hover,
+.push-image-btn:hover {
+  box-shadow: 0px 0px 15px black;
 }
 
 .image-input-text {
   outline: 1px solid black;
   border-radius: 10px;
-  padding: 5px 2px;
+  padding: 10px 15px;
   margin: 5px 0;
 }
 .form-close{
   --bulma-delete-color:black;
+  top:0;
+}
+.form-close:hover{
+  --bulma-delete-color:red;
+}
+.polaroid-form .polaroid-image-wrapper::before{
+  content:none;
 }
 
 /**************/

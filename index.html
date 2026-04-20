@@ -35,22 +35,10 @@
         <main class="main">
             <div class="columns interactibles-container is-centered">
                 <div class="column is-full">
-                    <button class="add-image-btn" id="add-image-btn">Aggiungi Immagine</button>
+                    <button class="add-image-btn" id="add-image-btn">
+                        <i class="bi bi-plus-circle-fill d-flex"></i>
+                    </button>
                 </div>
-                <form
-                    class=" column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper polaroid-container polaroid-form">
-                    
-                    <div class="placeholder-polaroid d-flex flex-column">
-                        <button id="close-form-btn" type="button" class="modal-close form-close is-large" aria-label="close"></button>
-                        <figure class="polaroid-image-wrapper">
-                            <input type="file" id="image-upload-input">
-                            <img id="img-upload-preview" src="https://placehold.co/600" alt="" class="polaroid-image is-skeleton">
-                        </figure>
-                        <input type="text" id="title-input" class="sometype-mono image-input-text" placeholder="Inserisci il titolo dell'immagine">
-                        <input type="text" id="date-input" class="sometype-mono image-input-text" placeholder="Inserisci la data dell'immagine">
-                        <button type="submit" class="add-image-btn" id="push-image">Aggiungi Immagine</button>
-                    </div>
-                </form>
                 <div class="column is-full">
                     <div class="columns is-centered">
                         <div class="column is-full-mobile is-half-desktop">
@@ -133,6 +121,27 @@
                     class="bi bi-arrow-bar-right fs-button"></i></button>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <div class="modal" id="form-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content d-flex justify-content-center">
+            <form
+                class="column is-12-mobile is-6-tablet is-4-desktop is-ultrawide polaroid-wrapper polaroid-container polaroid-form">
+                    <div class="placeholder-polaroid d-flex flex-column">
+                        <button id="close-form-btn" type="button" class="modal-close form-close is-large"
+                            aria-label="close"></button>
+                        <figure class="polaroid-image-wrapper">
+                            <input required type="file" id="image-upload-input" accept=".jpg, .jpeg, .png, .gif, .webp">
+                            <img id="img-upload-preview" src="https://placehold.co/600" alt="" class="polaroid-image is-skeleton">
+                        </figure>
+                        <input required type="text" id="title-input" class="sometype-mono image-input-text"
+                            placeholder="Inserisci il titolo dell'immagine">
+                        <input required type="date" id="date-input" class="sometype-mono image-input-text"
+                            placeholder="Inserisci la data dell'immagine">
+                        <button type="submit" class="push-image-btn" id="push-image">Aggiungi Immagine</button>
+                    </div>
+            </form>
+        </div>
     </div>
 
     <script src="./scripts/functions.js"></script>

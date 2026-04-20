@@ -10,6 +10,16 @@ let carouselIndex = 0;
  */
 let polaroidObjects = [];
 
+/**
+ * @type {string}
+ */
+let uploadedImageUrl = "";
+
+/**
+ * @type {string}
+ */
+const placeholderImageURL = "https://placehold.co/600";
+
 // La nostra funzione che lancia il fetch
 function fetchImages() {
     fetch(API_URL)
@@ -189,14 +199,84 @@ function closeModal() {
     allModalEls.forEach(modalElement => { modalElement.classList.remove("is-active"); });
 }
 
-function addImageBtnHandler(){
-    if(dom.polaroidFormEl){
-        dom.polaroidFormEl.classList.remove("d-none");
+function addImageBtnHandler() {
+    if (dom.formModal) {
+        dom.formModal.classList.add("is-active");
     }
 }
-function closeFormBtnHandler(){
-    if(dom.polaroidFormEl){
-        console.log("test");
-        dom.polaroidFormEl.classList.add("d-none");
+
+function imageUploadInputChangeHandler() {
+    if (dom.polaroidFormEl && dom.imageUploadInputEl instanceof HTMLInputElement) {
+        const thumbnailEl = dom.polaroidFormEl.querySelector("img");
+        if (thumbnailEl instanceof HTMLImageElement) {
+            thumbnailEl.classList.remove("is-skeleton");
+            const filesArray = dom.imageUploadInputEl.files;
+            console.log(filesArray);
+            if (filesArray && filesArray.length === 1) {
+                uploadedImageUrl = URL.createObjectURL(filesArray[0]);
+                thumbnailEl.src = uploadedImageUrl;
+            }
+            else {
+                return;
+            }
+        }
     }
+}
+
+/**
+ * @type {EventListener}
+ * @param {Event} event;
+ */
+function submitPolaroidFormHandler(event) {
+    event.preventDefault();
+    // Validate texts
+    if (!dom.titleInputEl || !dom.dateInputEl || !dom.imageUploadInputEl || !dom.polaroidFormEl) {
+        return;
+    }
+    const [titleSuccess, titleValue] = isValid(dom.titleInputEl.value);
+    const [dateSuccess, dateValue] = isValid(dom.dateInputEl.value);
+    const [imageURLSuccess, imageURLValue] = isValid(uploadedImageUrl);
+    if (!titleSuccess || !dateSuccess || !imageURLSuccess) {
+        return;
+    }
+
+    if(titleValue && dateValue && imageURLValue){
+        const convertedDateValue = getDate(dateValue);
+        const formattedDateValue = convertedDateValue.toLocaleDateString("it-IT").replaceAll("/", "-");
+        const newPolaroid = {
+            id: (polaroidObjects[polaroidObjects.length - 1].id + 1),
+            index: polaroidObjects.length,
+            imageURL: imageURLValue,
+            title: titleValue,
+            date: formattedDateValue
+        }
+        polaroidObjects.push(newPolaroid);
+        createPolaroid(newPolaroid);
+        dom.titleInputEl.value = "";
+        dom.dateInputEl.value = "";
+        dom.imageUploadInputEl.value = "";
+        const previewImage = dom.polaroidFormEl.querySelector("img");
+        if(previewImage){
+            previewImage.src = placeholderImageURL;
+        }
+        closeModal();
+    }
+
+    
+}
+
+/**
+ * @param {string} string
+ * @return {[boolean,?string]}
+ */
+function isValid(string) {
+    const sanifiedString = string.trim();
+    return ((sanifiedString === "") ? [false, null] : [true, sanifiedString]);
+}
+
+/**
+ * @param {string} dateString
+ */
+function getDate(dateString){
+    return new Date(dateString);
 }
