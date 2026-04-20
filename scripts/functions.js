@@ -33,10 +33,11 @@ function createPolaroid(polaroidObject) {
             imageEl.src = polaroidObject.imageURL;
             titleEl.textContent = polaroidObject.title;
             dateEl.textContent = polaroidObject.date;
-            const polaroidCard = imageEl.closest(".polaroid-container")
+            const polaroidCard = imageEl.closest(".polaroid-container");
             if(polaroidCard && polaroidCard instanceof HTMLElement){
                 polaroidCard.dataset.index = polaroidObject.index.toString();
                 polaroidCard.dataset.id = polaroidObject.id.toString();
+                polaroidCard.dataset.target = "modal";
             }
         }
     
@@ -107,11 +108,16 @@ function openModal(event) {
      * @type {HTMLImageElement | HTMLElement | null}
      */
     const target = event.target;
-    if (dom.html && dom.modalEl && target && target.dataset.target === "modal" && target instanceof HTMLImageElement && target.dataset.id) { // Aggiunto questa condizione target instanceof HTMLImageElement per rendere felice jsdoc che si lamentava che non era certo che target fosse un HTMLImageElement
-        carouselIndex = parseInt(target.dataset.id) - 1;
+    if(dom.html && dom.modalEl && target instanceof HTMLImageElement){
+        const polaroidCard = target.closest(".polaroid-container");
+        if(polaroidCard instanceof HTMLElement && polaroidCard.dataset.target === "modal")
         dom.modalEl.classList.add("is-active");
         dom.html.classList.add("modal-open");
-        generateModal(target);
+        generateModal(polaroidCard);
+    }
+    if (dom.html && dom.modalEl && target && target.dataset.target === "modal" && target instanceof HTMLImageElement && target.dataset.id) { // Aggiunto questa condizione target instanceof HTMLImageElement per rendere felice jsdoc che si lamentava che non era certo che target fosse un HTMLImageElement
+        carouselIndex = parseInt(target.dataset.id) - 1;
+        
     }
 }
 
@@ -124,13 +130,14 @@ function closeModal() {
 }
 
 /**
- * @param {HTMLImageElement | null} imageElement;
+ * @param {?HTMLElement} polaroidElement;
  */
-function generateModal(imageElement) {
-    if (dom.modalEl && imageElement) {
+function generateModal(polaroidElement) {
+    if (dom.modalEl && polaroidElement) {
         const modalImage = dom.modalEl.querySelector("img");
-        if (modalImage) {
-            modalImage.src = imageElement.src;
+        const targetImage = polaroidElement.querySelector("img");
+        if (modalImage && targetImage instanceof HTMLImageElement) {
+            modalImage.src = targetImage.src;
         }
     }
 }
