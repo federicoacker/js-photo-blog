@@ -5,6 +5,9 @@
  * @type {number};
  */
 let carouselIndex = 0;
+/**
+ * @type {{id:number,index:number, imageURL:string, title:string, date:string}[]}
+ */
 let polaroidObjects = [];
 
 // La nostra funzione che lancia il fetch
@@ -23,25 +26,24 @@ function fetchImages() {
  * @param {{id: number, index: number, imageURL:string, title:string, date:string}} polaroidObject
  */
 function createPolaroid(polaroidObject) {
-    if(dom.polaroidTemplateEl){
+    if (dom.polaroidTemplateEl) {
         const newPolaroid = document.importNode(dom.polaroidTemplateEl.content, true);
+        /** @type {?HTMLElement} */
+        const polaroidCard = newPolaroid.querySelector(".polaroid-container");
         const imageEl = newPolaroid.querySelector("img");
         const titleEl = newPolaroid.querySelector("h2");
         const dateEl = newPolaroid.querySelector("p");
-    
-        if(imageEl && titleEl && dateEl && polaroidObject){
+
+        if (imageEl && titleEl && dateEl && polaroidCard && polaroidObject) {
             imageEl.src = polaroidObject.imageURL;
             titleEl.textContent = polaroidObject.title;
             dateEl.textContent = polaroidObject.date;
-            const polaroidCard = imageEl.closest(".polaroid-container");
-            if(polaroidCard && polaroidCard instanceof HTMLElement){
-                polaroidCard.dataset.index = polaroidObject.index.toString();
-                polaroidCard.dataset.id = polaroidObject.id.toString();
-                polaroidCard.dataset.target = "modal";
-            }
+            polaroidCard.dataset.index = polaroidObject.index.toString();
+            polaroidCard.dataset.id = polaroidObject.id.toString();
+            polaroidCard.dataset.target = "modal";
         }
-    
-        if(dom.polaroidWallEl){
+
+        if (dom.polaroidWallEl) {
             dom.polaroidWallEl.appendChild(newPolaroid);
         }
     }
@@ -63,7 +65,7 @@ function generateObjects(jsonObject) {
             }
             return polaroidObject;
         });
-        if(dom.polaroidWallEl){
+        if (dom.polaroidWallEl) {
             dom.polaroidWallEl.innerHTML = "";
         }
         polaroidObjects.forEach(polaroidObject => createPolaroid(polaroidObject));
@@ -108,16 +110,13 @@ function openModal(event) {
      * @type {HTMLImageElement | HTMLElement | null}
      */
     const target = event.target;
-    if(dom.html && dom.modalEl && target instanceof HTMLImageElement){
+    if (dom.html && dom.modalEl && target instanceof HTMLImageElement) {
         const polaroidCard = target.closest(".polaroid-container");
-        if(polaroidCard instanceof HTMLElement && polaroidCard.dataset.target === "modal")
-        dom.modalEl.classList.add("is-active");
-        dom.html.classList.add("modal-open");
-        generateModal(polaroidCard);
-    }
-    if (dom.html && dom.modalEl && target && target.dataset.target === "modal" && target instanceof HTMLImageElement && target.dataset.id) { // Aggiunto questa condizione target instanceof HTMLImageElement per rendere felice jsdoc che si lamentava che non era certo che target fosse un HTMLImageElement
-        carouselIndex = parseInt(target.dataset.id) - 1;
-        
+        if (polaroidCard instanceof HTMLElement && polaroidCard.dataset.target === "modal") {
+            dom.modalEl.classList.add("is-active");
+            dom.html.classList.add("modal-open");
+            generateModal(polaroidCard);
+        }
     }
 }
 
@@ -136,7 +135,10 @@ function generateModal(polaroidElement) {
     if (dom.modalEl && polaroidElement) {
         const modalImage = dom.modalEl.querySelector("img");
         const targetImage = polaroidElement.querySelector("img");
-        if (modalImage && targetImage instanceof HTMLImageElement) {
+        const index = polaroidElement.dataset.index;
+
+        if (modalImage && targetImage instanceof HTMLImageElement && typeof (index) === "string") {
+            carouselIndex = parseInt(index);
             modalImage.src = targetImage.src;
         }
     }
@@ -144,49 +146,25 @@ function generateModal(polaroidElement) {
 
 function carouselNextBtnHandler() {
     if (dom.modalEl) {
-        const modalImage = dom.modalEl.querySelector("img");
-        let childToSelect;
-        let imageToSelect;
-        let srcIWant;
         carouselIndex++;
-        if (dom.polaroidWallEl && carouselIndex >= dom.polaroidWallEl.children.length) {
+        if (carouselIndex >= polaroidObjects.length) {
             carouselIndex = 0;
         }
-        if (dom.polaroidWallEl) {
-            childToSelect = dom.polaroidWallEl.children[carouselIndex];
-            if (childToSelect) {
-                imageToSelect = childToSelect.querySelector("img");
-                if (imageToSelect) {
-                    srcIWant = imageToSelect.src;
-                }
-            }
-        }
-        if (modalImage && srcIWant) {
-            modalImage.src = srcIWant;
+        const modalImage = dom.modalEl.querySelector("img");
+        if (modalImage) {
+            modalImage.src = polaroidObjects[carouselIndex].imageURL;
         }
     }
 }
 function carouselPrevBtnHandler() {
     if (dom.modalEl) {
-        const modalImage = dom.modalEl.querySelector("img");
-        let childToSelect;
-        let imageToSelect;
-        let srcIWant;
         carouselIndex--;
-        if (dom.polaroidWallEl && carouselIndex < 0) {
-            carouselIndex = dom.polaroidWallEl.children.length - 1;
+        if (carouselIndex < 0) {
+            carouselIndex = polaroidObjects.length - 1;
         }
-        if (dom.polaroidWallEl) {
-            childToSelect = dom.polaroidWallEl.children[carouselIndex];
-            if (childToSelect) {
-                imageToSelect = childToSelect.querySelector("img");
-                if (imageToSelect) {
-                    srcIWant = imageToSelect.src;
-                }
-            }
-        }
-        if (modalImage && srcIWant) {
-            modalImage.src = srcIWant;
+        const modalImage = dom.modalEl.querySelector("img");
+        if (modalImage) {
+            modalImage.src = polaroidObjects[carouselIndex].imageURL;
         }
     }
 }
