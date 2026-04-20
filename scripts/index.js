@@ -2,6 +2,10 @@
 'use strict'
 
 const dom = {
+    /**
+     * @type {?HTMLTemplateElement}
+     */
+    polaroidTemplateEl: document.querySelector("#polaroid-template"),
     polaroidWallEl: document.querySelector(".polaroid-wall"),
     errorMessage: document.querySelector("#errorMessage"),
     removeErrorBtn: document.querySelector(".delete"),
@@ -9,6 +13,7 @@ const dom = {
     modalCloseBtnEl: document.querySelector(".modal-close"),
     modalNextBtnEl: document.querySelector("#carousel-next"),
     modalPrevBtnEl: document.querySelector("#carousel-prev"),
+    html: document.querySelector("html")
 };
 const API_URL = "https://lanciweb.github.io/demo/api/pictures/";
 

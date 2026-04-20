@@ -143,8 +143,11 @@ main .columns.polaroid-wall {
 }
 .polaroid:hover .polaroid-image-wrapper::before {
   scale:1.2;
+  content: none;
 }
-
+html.modal-open{
+  overflow:hidden;
+}
 .modal{
   --bulma-modal-content-width:95%;
 }
