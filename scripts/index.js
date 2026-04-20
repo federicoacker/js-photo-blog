@@ -22,11 +22,8 @@ if(dom.removeErrorBtn){
     dom.removeErrorBtn.addEventListener("click", removeErrorBtnHandler);
 }
 document.addEventListener("click", openModal);
-if(dom.modalCloseBtnEl){
-    dom.modalCloseBtnEl.addEventListener("click", closeModal);
+
+if(dom.modalEl){
+    dom.modalEl.addEventListener("click", carouselBtnHandler);
 }
 
-if(dom.modalNextBtnEl && dom.modalPrevBtnEl){
-    dom.modalNextBtnEl.addEventListener("click", carouselNextBtnHandler);
-    dom.modalPrevBtnEl.addEventListener("click", carouselPrevBtnHandler);
-}

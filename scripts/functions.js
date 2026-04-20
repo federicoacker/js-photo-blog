@@ -120,14 +120,6 @@ function openModal(event) {
     }
 }
 
-function closeModal() {
-    const allModalEls = document.querySelectorAll(".modal");
-    if (dom.html) {
-        dom.html.classList.remove("modal-open");
-    }
-    allModalEls.forEach(modalElement => { modalElement.classList.remove("is-active"); });
-}
-
 /**
  * @param {?HTMLElement} polaroidElement;
  */
@@ -144,27 +136,55 @@ function generateModal(polaroidElement) {
     }
 }
 
-function carouselNextBtnHandler() {
-    if (dom.modalEl) {
-        carouselIndex++;
-        if (carouselIndex >= polaroidObjects.length) {
-            carouselIndex = 0;
+/**
+ * @type {EventListener}
+ * @param {{target:?HTMLElement}} event;
+ */
+function carouselBtnHandler(event) {
+    const target = event.target?.closest("button");
+    if (dom.modalEl && target && target.tagName === "BUTTON") {
+        if (target.classList.contains("carousel-prev")) {
+            carouselPrev();
         }
-        const modalImage = dom.modalEl.querySelector("img");
-        if (modalImage) {
-            modalImage.src = polaroidObjects[carouselIndex].imageURL;
+        else if (target.classList.contains("carousel-next")) {
+            carouselNext();
+        }
+        else if (target.classList.contains("modal-close")) {
+            closeModal();
         }
     }
 }
-function carouselPrevBtnHandler() {
-    if (dom.modalEl) {
-        carouselIndex--;
-        if (carouselIndex < 0) {
-            carouselIndex = polaroidObjects.length - 1;
-        }
-        const modalImage = dom.modalEl.querySelector("img");
-        if (modalImage) {
-            modalImage.src = polaroidObjects[carouselIndex].imageURL;
-        }
+
+function carouselNext() {
+    if (!dom.modalEl) {
+        return;
     }
+    carouselIndex++;
+    if (carouselIndex >= polaroidObjects.length) {
+        carouselIndex = 0;
+    }
+    const modalImage = dom.modalEl.querySelector("img");
+    if (modalImage) {
+        modalImage.src = polaroidObjects[carouselIndex].imageURL;
+    }
+}
+function carouselPrev() {
+    if (!dom.modalEl) {
+        return;
+    }
+    carouselIndex--;
+    if (carouselIndex < 0) {
+        carouselIndex = polaroidObjects.length - 1;
+    }
+    const modalImage = dom.modalEl.querySelector("img");
+    if (modalImage) {
+        modalImage.src = polaroidObjects[carouselIndex].imageURL;
+    }
+}
+function closeModal() {
+    const allModalEls = document.querySelectorAll(".modal");
+    if (dom.html) {
+        dom.html.classList.remove("modal-open");
+    }
+    allModalEls.forEach(modalElement => { modalElement.classList.remove("is-active"); });
 }
