@@ -13,7 +13,10 @@ const dom = {
     modalCloseBtnEl: document.querySelector(".modal-close"),
     modalNextBtnEl: document.querySelector("#carousel-next"),
     modalPrevBtnEl: document.querySelector("#carousel-prev"),
-    html: document.querySelector("html")
+    html: document.querySelector("html"),
+    addImageBtn: document.querySelector("#add-image-btn"),
+    polaroidFormEl: document.querySelector(".polaroid-form"),
+    closeFormBtn:document.querySelector("#close-form-btn")
 };
 const API_URL = "https://lanciweb.githubsd.io/demo/api/pictures/";
 
@@ -27,3 +30,9 @@ if(dom.modalEl){
     dom.modalEl.addEventListener("click", carouselBtnHandler);
 }
 
+if(dom.closeFormBtn){
+    dom.closeFormBtn.addEventListener("click", closeFormBtnHandler);
+}
+if(dom.addImageBtn){
+    dom.addImageBtn.addEventListener("click", addImageBtnHandler);
+}

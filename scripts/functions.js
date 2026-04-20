@@ -188,3 +188,15 @@ function closeModal() {
     }
     allModalEls.forEach(modalElement => { modalElement.classList.remove("is-active"); });
 }
+
+function addImageBtnHandler(){
+    if(dom.polaroidFormEl){
+        dom.polaroidFormEl.classList.remove("d-none");
+    }
+}
+function closeFormBtnHandler(){
+    if(dom.polaroidFormEl){
+        console.log("test");
+        dom.polaroidFormEl.classList.add("d-none");
+    }
+}
